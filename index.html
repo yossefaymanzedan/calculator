@@ -78,16 +78,16 @@ if (previousOperandText.textContent.includes('*') || previousOperandText.textCon
     console.log("current is: " + currentOperand + "prev is: " + previousOperand)
     switch (current_operation) {
       case '+':
-        computation = current + prev
+        computation = currentOperand + previousOperand
         break
       case '-':
-        computation = current - prev
+        computation = previousOperand - currentOperand
         break
       case '*':
-        computation = current * prev
+        computation = currentOperand * previousOperand
         break
       case '÷':
-        computation = current / prev
+        computation = previousOperand / currentOperand
         break
       default:
 
@@ -126,16 +126,16 @@ else {
     console.log("current is: " + currentOperand + "prev is: " + previousOperand)
     switch (current_operation) {
       case '+':
-        computation = current + prev
+        computation = currentOperand + previousOperand
         break
       case '-':
-        computation = current - prev
+        computation = previousOperand - currentOperand
         break
       case '*':
-        computation = current * prev
+        computation = currentOperand * previousOperand
         break
       case '÷':
-        computation = current / prev
+        computation = previousOperand / currentOperand
         break
       default:
 
