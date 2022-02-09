@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calculator</title>
+  <link href="styles.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="calculator-grid">
+    <div class="output">
+      <div data-previous-operand class="previous-operand"></div>
+      <div data-current-operand class="current-operand"></div>
+    </div>
+    <button data-all-clear class="span-two">AC</button>
+    <button data-delete>DEL</button>
+    <button data-operation>÷</button>
+    <button data-number>1</button>
+    <button data-number>2</button>
+    <button data-number>3</button>
+    <button data-operation>*</button>
+    <button data-number>4</button>
+    <button data-number>5</button>
+    <button data-number>6</button>
+    <button data-operation>+</button>
+    <button data-number>7</button>
+    <button data-number>8</button>
+    <button data-number>9</button>
+    <button data-operation>-</button>
+    <button data-number>.</button>
+    <button data-number>0</button>
+    <button data-equals class="span-two equal">=</button>
+  </div>
+
+
+
+<script>
+var currentOperand, previousOperand;
+var old_number;
+var current_operation;
+const numberButtons = document.querySelectorAll('[data-number]')
+const operationButtons = document.querySelectorAll('[data-operation]')
+const equalsButton = document.querySelector('[data-equals]')
+const deleteButton = document.querySelector('[data-delete]')
+const allClearButton = document.querySelector('[data-all-clear]')
+var previousOperandText = document.querySelector('.previous-operand')
+var CurrentOperandText = document.querySelector('.current-operand');
+
+function add_number(button) {
+
+
+numberButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log("current is: " + currentOperand + "prev is: " + previousOperand)
+    if(button.textContent === '.' && CurrentOperandText.textContent.includes('.')) return
+    console.log("current is: " + currentOperand + "prev is: " + previousOperand)
+    CurrentOperandText.innerHTML += button.innerHTML;
+    currentOperand = CurrentOperandText.textContent;
+
+
+
+
+
+
+
+  })
+});
+}
+add_number();
+operationButtons.forEach(opertaion_button => {
+    opertaion_button.addEventListener('click', () => {
+if (previousOperandText.textContent.includes('*') || previousOperandText.textContent.includes('+') || previousOperandText.textContent.includes('-') || previousOperandText.textContent.includes('÷')) {
+    let computation;
+    const prev = parseFloat(previousOperand)
+    const current = parseFloat(currentOperand)
+    console.log("current is: " + currentOperand + "prev is: " + previousOperand)
+    switch (current_operation) {
+      case '+':
+        computation = current + prev
+        break
+      case '-':
+        computation = current - prev
+        break
+      case '*':
+        computation = current * prev
+        break
+      case '÷':
+        computation = current / prev
+        break
+      default:
+
+  }
+  console.log("current is: " + currentOperand + "prev is: " + previousOperand + "computation is " + computation)
+  previousOperandText.innerHTML = computation + opertaion_button.innerHTML;
+CurrentOperandText.textContent = ''
+currentOperand = ''
+  previousOperand = computation
+  current_operation = opertaion_button.innerHTML
+    }
+
+else {
+
+
+
+    previousOperand = currentOperand
+    currentOperand = ''
+    previousOperandText.textContent = previousOperand + opertaion_button.innerHTML
+    current_operation = opertaion_button.innerHTML
+    CurrentOperandText.innerHTML = '';
+
+}
+
+}
+
+)
+    })
+
+
+    equalsButton.addEventListener('click', () => {
+        if (previousOperandText.textContent.includes('*') || previousOperandText.textContent.includes('+') || previousOperandText.textContent.includes('-') || previousOperandText.textContent.includes('÷')) {
+    let computation;
+    const prev = parseFloat(previousOperand)
+    const current = parseFloat(currentOperand)
+    console.log("current is: " + currentOperand + "prev is: " + previousOperand)
+    switch (current_operation) {
+      case '+':
+        computation = current + prev
+        break
+      case '-':
+        computation = current - prev
+        break
+      case '*':
+        computation = current * prev
+        break
+      case '÷':
+        computation = current / prev
+        break
+      default:
+
+  }
+  console.log("current is: " + currentOperand + "prev is: " + previousOperand + "computation is " + computation)
+CurrentOperandText.innerHTML = computation;
+
+currentOperand = computation
+previousOperandText.textContent = ''
+    }
+    })
+
+
+
+deleteButton.addEventListener('click', () => {
+    currentOperand = currentOperand.toString().slice(0, -1)
+    CurrentOperandText.textContent = currentOperand
+})
+allClearButton.addEventListener('click', () => {
+    currentOperand = ''
+    previousOperand = ''
+    current_operation = ''
+    CurrentOperandText.textContent = ''
+    previousOperandText.textContent = ''
+})
+</script>
+</body>
+</html>
